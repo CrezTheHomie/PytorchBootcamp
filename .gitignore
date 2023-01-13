@@ -2,3 +2,5 @@ Include
 Scripts
 Lib
 pyvenv.cfg
+MNIST_data
+data
