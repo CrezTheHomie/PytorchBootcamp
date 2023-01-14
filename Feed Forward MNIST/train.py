@@ -46,6 +46,8 @@ def train(model, data_loader, loss_fn, optimizer, device, epochs):
 
 
 def train_one_epoch(model, data_loader, loss_fn, optimizer, device):
+
+    running_loss = 0
     for input, target in data_loader:
         input, target = input.to(device), target.to(device)
 
@@ -56,7 +58,9 @@ def train_one_epoch(model, data_loader, loss_fn, optimizer, device):
         loss.backward()
         optimizer.step()
 
-    print(f"Loss: {loss.item()}")
+        running_loss += loss.item()
+
+    print(f"Running Loss: {running_loss}")
 
 
 if __name__ == "__main__":
