@@ -72,8 +72,8 @@ class UrbanSoundDataset(Dataset):
 
 
 if __name__ == "__main__":
-    ANNOTATIONS_FILE = "data\\UrbanSound8K\\metadata\\UrbanSound8K.csv"
-    AUDIO_DIR = "data\\UrbanSound8k\\audio"
+    ANNOTATIONS_FILE = "D:\\Code\PytorchBootcamp\\PytorchBootcamp\\data\\UrbanSound8K\\metadata\\UrbanSound8K.csv"
+    AUDIO_DIR = "D:\\Code\\PytorchBootcamp\\PytorchBootcamp\\data\\UrbanSound8K\\audio"
     SAMPLE_RATE = 22050
     NUM_SAMPLES = 22050
 
