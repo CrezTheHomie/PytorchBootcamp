@@ -83,5 +83,5 @@ if __name__ == "__main__":
 
     train(ff_net, train_data_loader, loss_fn=loss_fn, optimizer=optimizer, device=device, epochs=10)
 
-    torch.save(ff_net.state_dict(), "data\\ff_net.pth")
+    torch.save(ff_net.state_dict(), "data\\MNIST\\ff_net.pth")
     print(f"Model trained and stored at ff_net.pth")

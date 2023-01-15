@@ -72,7 +72,7 @@ class UrbanSoundDataset(Dataset):
 
 
 if __name__ == "__main__":
-    ANNOTATIONS_FILE = "data\\UrbanSound8k\\metadata\\UrbanSound8k.csv"
+    ANNOTATIONS_FILE = "data\\UrbanSound8K\\metadata\\UrbanSound8K.csv"
     AUDIO_DIR = "data\\UrbanSound8k\\audio"
     SAMPLE_RATE = 22050
     NUM_SAMPLES = 22050
