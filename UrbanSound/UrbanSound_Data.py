@@ -94,7 +94,7 @@ if __name__ == "__main__":
     USD = UrbanSoundDataset(annotations_file=ANNOTATIONS_FILE,
     audio_dir=AUDIO_DIR,
     transformation=mel_spectogram,
-    sr=SAMPLE_RATE,
+    target_sr=SAMPLE_RATE,
     num_samples=NUM_SAMPLES,
     device=device)
     print(f"There are {len(USD)} samples in dataset")
