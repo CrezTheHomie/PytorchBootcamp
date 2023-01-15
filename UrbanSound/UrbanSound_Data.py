@@ -84,10 +84,11 @@ if __name__ == "__main__":
 
     print(f"We are using a {device} device")
 
-    mel_spectogram = torchaudio.transforms.MelSpectrogram(sample_rate=SAMPLE_RATE,
+    mel_spectogram = torchaudio.transforms.MelSpectrogram(
+        sample_rate=SAMPLE_RATE,
         n_fft= 1024,
         hop_length=512,
-        n_mfcc= 64
+        n_mels=64
     )
 
     USD = UrbanSoundDataset(annotations_file=ANNOTATIONS_FILE,
