@@ -83,6 +83,7 @@ if __name__ == "__main__":
         device = "cpu"
 
     print(f"We are using a {device} device")
+    print(f"Device is a {torch.cuda.get_device_name()}")
 
     mel_spectogram = torchaudio.transforms.MelSpectrogram(
         sample_rate=SAMPLE_RATE,
