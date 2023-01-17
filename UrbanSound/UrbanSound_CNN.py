@@ -43,7 +43,7 @@ class UrbanSoundCNN(nn.Module):
             nn.ReLU(),
             nn.MaxPool2d(kernel_size=2)
         )
-        
+        # print(f"In features: {128*5*4}")
         self.flatten = nn.Flatten()
         self.linear = nn.Linear(in_features=128*5*4, out_features=10)
         self.softmax = nn.Softmax(dim=1)

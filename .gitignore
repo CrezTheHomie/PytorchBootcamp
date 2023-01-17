@@ -4,3 +4,5 @@ Lib
 pyvenv.cfg
 MNIST_data
 data
+__pycache__
+venv

@@ -3,6 +3,12 @@ from torch.utils.data import Dataset
 import pandas as pd
 import torchaudio
 import torch
+from GPUtil import showUtilization as gpu_usage
+
+ANNOTATIONS_FILE = "D:\\Code\PytorchBootcamp\\PytorchBootcamp\\data\\UrbanSound8K\\metadata\\UrbanSound8K.csv"
+AUDIO_DIR = "D:\\Code\\PytorchBootcamp\\PytorchBootcamp\\data\\UrbanSound8K\\audio"
+SAMPLE_RATE = 22050
+NUM_SAMPLES = 22050
 
 class UrbanSoundDataset(Dataset):
 
@@ -42,6 +48,7 @@ class UrbanSoundDataset(Dataset):
     def _resample_if_necessary(self, signal, sr: int):
         if sr != self.target_sample_rate:
             resampler = torchaudio.transforms.Resample(sr, self.target_sample_rate)
+            resampler.to(self.device)
             signal = resampler(signal)
         return signal
 
@@ -49,11 +56,12 @@ class UrbanSoundDataset(Dataset):
         # signal -> Tensor (channels, num samples)
         # cut if too large
         if signal.shape[1] > self.num_samples:
-            signal = signal[:, self.num_samples]
+            signal = signal[:, :self.num_samples]
         # pad if too small
         elif signal.shape[1] < self.num_samples:
             num_missing_samples = self.num_samples - signal.shape[1]
-            signal = torch.nn.functional.pad(signal, (0, num_missing_samples))
+            last_dim_padding = (0, num_missing_samples)
+            signal = torch.nn.functional.pad(signal, last_dim_padding)
 
         return signal
 
@@ -65,17 +73,15 @@ class UrbanSoundDataset(Dataset):
         signal = self._resample_if_necessary(signal, sr)
         signal = self._mix_down_if_necessary(signal)
         signal = self._resize_if_necessary(signal)
-
+        
+        
         signal = self.transformation(signal)
-
+        # print(f"GetItem\n")
+        # gpu_usage()
         return signal, label
 
 
 if __name__ == "__main__":
-    ANNOTATIONS_FILE = "D:\\Code\PytorchBootcamp\\PytorchBootcamp\\data\\UrbanSound8K\\metadata\\UrbanSound8K.csv"
-    AUDIO_DIR = "D:\\Code\\PytorchBootcamp\\PytorchBootcamp\\data\\UrbanSound8K\\audio"
-    SAMPLE_RATE = 22050
-    NUM_SAMPLES = 22050
 
     if torch.cuda.is_available():
         device = "cuda"
